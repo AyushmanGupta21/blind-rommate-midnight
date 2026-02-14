@@ -3,8 +3,8 @@ import path from 'node:path';
 export const currentDir = path.resolve(new URL(import.meta.url).pathname, '..');
 
 export const contractConfig = {
-  privateStateStoreName: 'counter-private-state',
-  zkConfigPath: path.resolve(currentDir, '..', '..', 'counter-contract', 'src', 'managed', 'counter'),
+  privateStateStoreName: 'rommate-match-private-state',
+  zkConfigPath: path.resolve(currentDir, '..', '..', 'rommate-match-contract', 'src', 'managed', 'rommate-match'),
 };
 
 export interface Config {

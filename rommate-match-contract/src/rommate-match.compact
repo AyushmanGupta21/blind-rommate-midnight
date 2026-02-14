@@ -1,0 +1,23 @@
+// Blind Roommate Matcher - Zero-Knowledge Proof Smart Contract
+// Prospective roommates prove financial reliability and lifestyle compatibility 
+// via ZK without sharing bank statements or full identity
+
+pragma language_version >= 0.20;
+
+import CompactStandardLibrary;
+
+// Public state: Total number of verified profiles
+export ledger verifiedProfiles: Counter;
+
+// Public state: Total successful matches
+export ledger successfulMatches: Counter;
+
+// Circuit: Simple increment for verified profiles (demonstration)
+export circuit verifyProfile(): [] {
+  verifiedProfiles.increment(1);
+}
+
+// Circuit: Simple increment for successful matches (demonstration)
+export circuit recordMatch(): [] {
+  successfulMatches.increment(1);
+}

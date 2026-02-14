@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../../../../",
+  "sources": ["src/rommate-match.compact"],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAIA;;;;;;;;;;MAWA,AAAA,aAEC;;;;;;;;;;;;;;;;;;;;;;OAAA;MAGD,AAAA,WAEC;;;;;;;;;;;;;;;;;;;;;;OAAA;;;;;;GACA;EAnBD;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAKA;;;;;;;;;yEAAwC;IAGxC;;;;;;;;;yEAAyC;;;;;;;GAWxC;EARD,AAAA,gBAEC;UADC,KAAgB;IAAhB;;;;;;;;;;6FAAA,KAAgB;;;;wEAAA;;GACjB;EAGD,AAAA,cAEC;UADC,KAAiB;IAAjB;;;;;;;;;;6FAAA,KAAiB;;;;wEAAA;;GAClB;;;;;;;;;;;;;;;;IAbD;qCAAA;;;;;;;;;;;0GAAwC;KAAA;IAGxC;qCAAA;;;;;;;;;;;0GAAyC;KAAA;;;;;;;;;;"
+}

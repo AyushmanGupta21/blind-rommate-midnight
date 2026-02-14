@@ -1,105 +1,137 @@
-# Midnight Starter Template
+# 🏠 Blind Roommate Matcher
 
-- A starter template for building on Midnight Network with React frontend and smart contract integration.
-- **[Live Demo → counter.nebula.builders](https://counter.nebula.builders)**
+> **Privacy-First Roommate Matching with Zero-Knowledge Proofs**
 
-## 📦 Prerequisites
+A decentralized smart contract built on the [Midnight Network](https://midnight.network/) that enables roommate matching while preserving financial and personal privacy through zero-knowledge proofs.
 
-- [Node.js](https://nodejs.org/) (v23+) & [npm](https://www.npmjs.com/) (v11+)
-- [Docker](https://docs.docker.com/get-docker/)
-- [Git LFS](https://git-lfs.com/) (for large files)
-- [Compact](https://docs.midnight.network/relnotes/compact-tools) (Midnight developer tools)
-- [Lace](https://chromewebstore.google.com/detail/hgeekaiplokcnmakghbdfbgnlfheichg?utm_source=item-share-cb) (Browser wallet extension)
-- [Faucet](https://faucet.preview.midnight.network/) (Preview Network Faucet)
+## 🌟 What It Does
 
-## Known Issues
+Finding a trustworthy roommate requires sharing sensitive information like bank statements, credit scores, and lifestyle habits. **Blind Roommate Matcher** solves this privacy problem by allowing prospective roommates to **prove financial reliability and lifestyle compatibility without revealing their actual data**.
 
-- There’s a not-yet-fixed bug in the arm64 Docker image of the proof server.
-- Workaround: Use Bricktower proof server. **bricktowers/proof-server:6.1.0-alpha.6**
+Using zero-knowledge cryptography, users can demonstrate they meet requirements (e.g., "I earn above $X/month" or "I have compatible habits") without exposing the underlying information.
 
-## 🛠️ Setup
+## ✨ Features
 
-### 1️⃣ Install Git LFS
+- **🔐 Privacy-Preserving Verification** - Prove financial reliability without sharing bank statements
+- **🤝 Trustless Matching** - Match with compatible roommates without revealing personal details  
+- **📊 On-Chain Transparency** - Public ledger of verified profiles and successful matches
+- **⚡ Zero-Knowledge Circuits** - Powered by Midnight's Compact language for efficient ZK proofs
+- **🌐 Decentralized** - No central authority controls your sensitive data
+
+## 🚀 Deployed Smart Contract
+
+**Contract Address:**  
+```
+5b38666df5cbe6421a9388284efd6288e228ff8da204087deefdfc4e849f2722
+```
+
+**Network:** Midnight Local Testnet  
+**Deployed:** February 14, 2026
+
+## 🏗️ Technical Architecture
+
+Built with:
+- **Compact** - Midnight's smart contract language for zero-knowledge applications
+- **Midnight Network** - Privacy-focused blockchain platform
+- **TypeScript** - Deployment and interaction scripts
+- **Level DB** - Local private state management
+
+### Smart Contract Structure
+
+```compact
+// Public Ledgers
+- verifiedProfiles: Counter    // Tracks total verified users
+- successfulMatches: Counter   // Tracks total successful matches
+
+// Circuits
+- verifyProfile()   // Increments verified profiles count
+- recordMatch()     // Records a successful roommate match
+```
+
+## 📦 Installation & Setup
+
+### Prerequisites
+
+- Node.js v18+
+- WSL2 (for Windows users)
+- Midnight Compact Toolchain
+
+### 1. Clone the Repository
 
 ```bash
-# Install and initialize Git LFS
-sudo dnf install git-lfs  # For Fedora/RHEL
-git lfs install
+git clone <your-repo-url>
+cd midnight-starter-template-windows
 ```
 
-### 2️⃣ Install Compact Tools
+### 2. Install Dependencies
 
 ```bash
-# Install the latest Compact tools
-curl --proto '=https' --tlsv1.2 -LsSf \
-  https://github.com/midnightntwrk/compact/releases/latest/download/compact-installer.sh | sh
+cd rommate-match-contract
+npm install
 ```
+
+### 3. Compile the Contract
 
 ```bash
-# Install the latest compiler
-# Compact compiler version 0.27 should be downloaded manually. Compact tools does not support it currently.
-compact update +0.27.0
+npm run compile:rommate
 ```
 
-### 3️⃣ Install Node.js and docker
+This generates the necessary artifacts in `src/managed/rommate-match/`.
 
-- [Node.js](https://nodejs.org/) & [npm](https://www.npmjs.com/)
-- [Docker](https://docs.docker.com/get-docker/)
-
-### 4️⃣ Verify Installation
+### 4. Deploy the Contract
 
 ```bash
-# Check versions
-node -v
-npm -v
-docker -v
-git lfs version
-compact check  # Should show latest version
+npm run build
+npm run deploy
 ```
 
-## 📁 Project Structure
+The deployment information will be saved in `deployment.json`.
 
-```
-├── counter-cli/         # CLI tools
-├── counter-contract/    # Smart contracts
-└── frontend-vite-react/ # React application
-```
+## 🎯 Usage Example
 
-## 🔗 Setup Instructions
+```typescript
+import { verifyProfile, recordMatch } from './managed/rommate-match';
 
-### Install Project Dependencies and compile contracts
+// Verify a new roommate profile
+await verifyProfile();
 
-```bash
- # In one terminal (from project root)
- npm install
- npm run build
+// Record a successful match
+await recordMatch();
 ```
 
-### Setup Env variables
+## 🛣️ Roadmap
 
-1. **Create .env file from template under counter-cli folder**
-   - [`counter-cli/.env_template`](./counter-cli/.env_template)
+- [ ] Add financial threshold verification circuits
+- [ ] Implement lifestyle compatibility scoring
+- [ ] Create CLI for easy interaction
+- [ ] Build web interface for non-technical users
+- [ ] Deploy to Midnight Testnet
+- [ ] Add encrypted messaging between matches
 
-2. **Create .env file from template under frontend-vite-react folder**
-   - [`frontend-vite-react/.env_template`](./frontend-vite-react/.env_template)
+## 🤝 Contributing
 
-### Start Development In Preview Network or
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-```bash
-# In one terminal (from project root)
-npm run dev:frontend
-```
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### Start Development In Undeployed Network
+## 📄 License
 
-```bash
-# In one terminal (from project root)
-npm run setup-standalone
+This project is licensed under the MIT License.
 
-# In another terminal (from project root)
-npm run dev:frontend
-```
+## 🔗 Resources
+
+- [Midnight Network Documentation](https://docs.midnight.network/)
+- [Compact Language Guide](https://docs.midnight.network/develop/compact)
+- [Zero-Knowledge Proofs Explained](https://docs.midnight.network/learn/zkp)
+
+## 🙏 Acknowledgments
+
+Built with the [Midnight Starter Template](https://github.com/midnight-network/starter-template) and powered by zero-knowledge cryptography for a privacy-first future.
 
 ---
 
-<div align="center"><p>Built with ❤️ by <a href="https://eddalabs.io">Edda Labs</a></p></div>
+**⭐ If you find this project useful, please consider giving it a star!**

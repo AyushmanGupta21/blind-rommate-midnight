@@ -19,7 +19,7 @@ import { WebSocket } from 'ws';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
 
-import { Contract, ledger as counterLedger } from './managed/counter/contract/index.js';
+import { Contract, ledger as roommateMatchLedger } from './managed/rommate-match/contract/index.js';
 import { CompiledContract } from '@midnight-ntwrk/compact-js';
 import { deployContract } from '@midnight-ntwrk/midnight-js-contracts';
 import { httpClientProofProvider } from '@midnight-ntwrk/midnight-js-http-client-proof-provider';
@@ -59,7 +59,7 @@ const NETWORK_ID = process.env.NETWORK_ID ?? 'undeployed';
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 // ZK assets (keys, zkir) live in src/managed, not dist — tsc doesn't copy them
-const zkConfigPath = path.resolve(currentDir, '..', 'src', 'managed', 'counter');
+const zkConfigPath = path.resolve(currentDir, '..', 'src', 'managed', 'rommate-match');
 const deploymentPath = path.resolve(currentDir, '..', 'deployment.json');
 
 // ---------------------------------------------------------------------------
@@ -73,9 +73,9 @@ const logger = pino(
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
-type CounterPrivateState = { privateCounter: number };
-type CounterCircuits = ImpureCircuitId<Contract<CounterPrivateState>>;
-const CounterPrivateStateId = 'counterPrivateState' as const;
+type RoommateMatchPrivateState = { privateCounter: number };
+type RoommateMatchCircuits = ImpureCircuitId<Contract<RoommateMatchPrivateState>>;
+const RoommateMatchPrivateStateId = 'roommateMatchPrivateState' as const;
 
 // ---------------------------------------------------------------------------
 // Helpers (adapted from counter-cli/src/api.ts)
@@ -263,7 +263,7 @@ async function main() {
   setNetworkId(NETWORK_ID);
 
   console.log('\n╔══════════════════════════════════════════════════════════╗');
-  console.log('║           Counter Contract Deploy Script                ║');
+  console.log('║      Blind Roommate Matcher Contract Deploy Script      ║');
   console.log(`║           Network: ${NETWORK_ID.padEnd(38)}║`);
   console.log('╚══════════════════════════════════════════════════════════╝\n');
 
@@ -343,11 +343,11 @@ async function main() {
     wallet, shieldedSecretKeys, dustSecretKey, unshieldedKeystore, syncedState,
   );
 
-  const zkConfigProvider = new NodeZkConfigProvider<CounterCircuits>(zkConfigPath);
+  const zkConfigProvider = new NodeZkConfigProvider<RoommateMatchCircuits>(zkConfigPath);
 
   const providers = {
-    privateStateProvider: levelPrivateStateProvider<typeof CounterPrivateStateId>({
-      privateStateStoreName: 'counter-private-state',
+    privateStateProvider: levelPrivateStateProvider<typeof RoommateMatchPrivateStateId>({
+      privateStateStoreName: 'roommate-match-private-state',
       signingKeyStoreName: 'signing-keys',
       midnightDbName: 'midnight-level-db',
       walletProvider: walletAndMidnightProvider,
@@ -360,16 +360,16 @@ async function main() {
   };
 
   // --- Compile contract ---
-  const counterCompiledContract = CompiledContract.make('counter', Contract).pipe(
+  const roommateMatchCompiledContract = CompiledContract.make('rommate-match', Contract).pipe(
     CompiledContract.withVacantWitnesses,
     CompiledContract.withCompiledFileAssets(zkConfigPath),
   );
 
   // --- Deploy ---
-  const contract = await withStatus('Deploying counter contract (this may take a few minutes)', async () => {
+  const contract = await withStatus('Deploying Blind Roommate Matcher contract (this may take a few minutes)', async () => {
     return deployContract(providers, {
-      compiledContract: counterCompiledContract,
-      privateStateId: CounterPrivateStateId,
+      compiledContract: roommateMatchCompiledContract,
+      privateStateId: RoommateMatchPrivateStateId,
       initialPrivateState: { privateCounter: 0 },
     });
   });
