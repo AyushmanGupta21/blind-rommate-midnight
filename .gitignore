@@ -59,3 +59,20 @@ jspm_packages/
 # Frontend build artifacts (copied from contract source during build)
 frontend-vite-react/public/midnight/
 
+# Environment variables and sensitive data
+.env
+.env.local
+.env.*.local
+*.env
+
+# Deployment files with sensitive keys
+deployment.json
+**/deployment.json
+
+# Private keys and secrets
+*.key
+*.pem
+*.seed
+
+# Reference/example code (not part of production)
+reference-portfolio/

@@ -4,15 +4,15 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "counter-cli",
-    "counter-contract",
+    "rommate-match-cli",
+    "rommate-match-contract",
     "frontend-vite-react"
   ],
   "scripts": {
     "compact": "turbo run compact",
     "build": "turbo run build",
-    "build-production": "git lfs pull && cd counter-contract && npm run build && cd ../frontend-vite-react && npm run build",    
-    "setup-standalone": "cd counter-cli && npm run setup-undeployed",
+    "build-production": "git lfs pull && cd rommate-match-contract && npm run build && cd ../frontend-vite-react && npm run build",    
+    "setup-standalone": "cd rommate-match-cli && npm run setup-undeployed",
     "dev:frontend": "cd frontend-vite-react && npm run dev",    
     "lint": "turbo run lint"     
   },

@@ -68,7 +68,7 @@ export class MidnightBrowserWallet {
           apiVersion: _wallet.apiVersion,
           connect: _wallet.connect,
           icon: _wallet.icon,
-          rdns: _wallet.rdns,
+          rdns: key, // Use the key as the stable identifier for lookup
         });
       } catch (e) {
         console.log(e);
@@ -123,9 +123,10 @@ export class MidnightBrowserWallet {
           first: 1_000,
           with: () =>
             throwError(() => {
-              logger?.error("Could not find wallet initial API");
+              const availableKeys = window.midnight ? Object.keys(window.midnight).join(', ') : 'none';
+              logger?.error(`Could not find wallet initial API for '${rdns}'. Available: ${availableKeys}`);
 
-              return new Error("Could not find wallet initial API");
+              return new Error(`Could not find wallet initial API for '${rdns}'. Available: ${availableKeys}`);
             }),
         }),
         concatMap(async (initialAPI) => {          
@@ -137,8 +138,8 @@ export class MidnightBrowserWallet {
         catchError((error, apis) =>
           error
             ? throwError(() => {
-                logger?.error("Unable to enable connector API");
-                return new Error("Application is not authorized");
+                logger?.error({ msg: "Unable to enable connector API", error });
+                return error instanceof Error ? error : new Error(`Connection failed: ${String(error)}`);
               })
             : apis
         ),

@@ -22,7 +22,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { MidnightBrowserWallet } from "../api/walletController";
 
 export const MidnightWallet = () => {
-  const { open, setOpen, status } = useWallet();
+  const { open, setOpen, status, error, connectingWallet } = useWallet();
   const [selectedNetwork, setSelectedNetwork] = useState(networkID.PREVIEW);
 
   useEffect(() => {
@@ -55,6 +55,17 @@ export const MidnightWallet = () => {
           setSelectedNetwork={setSelectedNetwork}
         />
         <ScreenMain setOpen={setOpen} selectedNetwork={selectedNetwork} />
+        {/* Display Error if any */}
+        {error && (
+            <div className="text-red-500 text-center text-sm px-4 py-2">
+                Unable to connect: {error.message || String(error)}
+            </div>
+        )}
+        {connectingWallet && (
+            <div className="text-center text-sm px-4 py-2">
+                Connecting...
+            </div>
+        )}
         <Footer />
       </DialogContent>
     </Dialog>

@@ -19,7 +19,6 @@ export default function ScreenMain({ selectedNetwork, setOpen }: { selectedNetwo
         {wallets.map((wallet, index) => {
           const config = walletsListFormat[wallet.name];
           if (!config) return null; // Skip rendering if config is not found
-          const walletKey = config.key;
           const displayName = config.displayName;
           const icon = config.icon;
 
@@ -28,9 +27,14 @@ export default function ScreenMain({ selectedNetwork, setOpen }: { selectedNetwo
               key={index}
               iconReactNode={icon}
               name={displayName}
-              action={() => {
-                connectWallet(walletKey, selectedNetwork);
-                setOpen(false);
+              action={async () => {
+                 const rdns = wallet.rdns; 
+                 if (connectWallet) {
+                    await connectWallet(rdns, selectedNetwork);
+                    // Do not close dialog here to allow error display in parent if connection fails.
+                    // If successful, the user can close it or we can add a listener to status change.
+                    // setOpen(false); 
+                 }
               }}
             />
           );

@@ -11,5 +11,6 @@ export enum networkID {
   UNDEPLOYED = "undeployed",
   PREVIEW = "preview", 
   PREPROD = "preprod",
+  TESTNET = "testnet",
   MAINNET = "mainnet"
 }

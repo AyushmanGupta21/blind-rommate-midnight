@@ -12,7 +12,7 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 export default defineConfig(({ mode }) => ({
   define: {
     'process.env.NODE_ENV': JSON.stringify(mode === 'production' ? 'production' : 'development'),
-    'process.env': {},
+    // 'process.env': {}, // Removed to avoid incorrectly polyfilling process.env as empty object
     global: 'globalThis',
   },
   plugins: [
@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      // Add any other aliases you need
+      'isomorphic-ws': path.resolve(__dirname, './src/polyfills/isomorphic-ws.ts'),
     },
   },
   optimizeDeps: {

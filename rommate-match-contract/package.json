@@ -1,14 +1,11 @@
 {
-  "name": "@eddalabs/counter-contract",
+  "name": "@eddalabs/roommate-contract",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "compile": "compact compile src/counter.compact src/managed/counter",
-    "compile:voting": "compact compile src/voting.compact src/managed/voting",
-    "compile:rommate": "compact compile src/rommate-match.compact src/managed/rommate-match",
+    "compile": "compact compile src/rommate-match.compact src/managed/rommate-match",
     "build": "tsc",
-    "deploy": "node dist/deploy.js",
-    "deploy:voting": "node dist/deploy-voting.js"
+    "deploy": "node dist/deploy.js"
   },
   "dependencies": {
     "@midnight-ntwrk/compact-js": "2.4.0",
