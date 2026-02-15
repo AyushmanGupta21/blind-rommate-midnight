@@ -199,9 +199,6 @@ export const RoommateMatch = () => {
                   /* Connected State (Real or Demo) */
                   <>
                      {profileStep === 'create' ? (
-                  /* Connected & Active Contract State */
-                  <>
-                     {profileStep === 'create' ? (
                        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 h-full flex flex-col justify-between">
                           <div>
                             <div className="flex items-center gap-4 mb-6">
