@@ -16,7 +16,17 @@ Using zero-knowledge cryptography, users can demonstrate they meet requirements 
 - **🤝 Trustless Matching** - Match with compatible roommates without revealing personal details  
 - **📊 On-Chain Transparency** - Public ledger of verified profiles and successful matches
 - **⚡ Zero-Knowledge Circuits** - Powered by Midnight's Compact language for efficient ZK proofs
-- **🌐 Decentralized** - No central authority controls your sensitive data
+- 🌐 Decentralized - No central authority controls your sensitive data
+
+## 📸 Preview
+
+<div align="center">
+  <img src="./assets/screenshot-1.png" alt="Home Page" width="800" />
+  <br/><br/>
+  <img src="./assets/screenshot-2.png" alt="Verification Flow" width="800" />
+  <br/><br/>
+  <img src="./assets/screenshot-3.png" alt="Matching Interface" width="800" />
+</div>
 
 ## 🚀 Deployed Smart Contract
 
